@@ -242,7 +242,7 @@ div.stButton > button[kind="primary"] p {{
     text-shadow: 0 2px 6px rgba(0,0,0,0.4);
 }}
 
-/* FIX BUG 1: AGENDA HARI INI (KONTRAS TEKS PAKSA) */
+/* AGENDA HARI INI */
 .agenda-card {{
     background-color: #ffffff !important;
     padding: 1.15rem 1.4rem;
@@ -300,7 +300,7 @@ div.stButton > button[kind="primary"] p {{
     margin-left: 8px;
 }}
 
-/* FIX BUG 2: KARTU JADWAL 7 HARI */
+/* KARTU JADWAL 7 HARI */
 .day-col-card {{
     background-color: #ffffff !important;
     border-radius: 12px;
@@ -647,14 +647,14 @@ elif menu == 3:
                 dt_start = datetime.combine(tgl_acara, jam_mulai).strftime("%Y%m%dT%H%M00")
                 dt_end = datetime.combine(tgl_acara, jam_selesai).strftime("%Y%m%dT%H%M00")
                 params = urllib.parse.urlencode({
-                    "action": "TEMPLATE",
                     "text": judul_acara.strip(),
                     "dates": f"{dt_start}/{dt_end}",
                     "location": f"{ruang['label']} ({ruang['loc']})",
                     "details": deskripsi.strip(),
                     "add": ruang["mail"],
+                    "guests": ruang["mail"],
                 })
-                gcal_url = f"https://calendar.google.com/calendar/render?{params}"
+                gcal_url = f"https://calendar.google.com/calendar/u/0/r/eventedit?{params}"
                 st.success("Tautan Google Calendar berhasil dibuat! Klik tombol di bawah untuk menyimpan jadwal:")
                 st.link_button("🚀 Buka & Simpan di Google Calendar Sekarang", gcal_url, type="primary", use_container_width=True)
 
@@ -666,7 +666,7 @@ elif menu == 3:
 <li>Pastikan ruangan yang dipilih pada bagian atas sudah sesuai.</li>
 <li>Isi nama kegiatan, tanggal, dan jam peminjaman pada formulir di samping.</li>
 <li>Klik tombol <b>Buat Undangan Google Calendar</b>.</li>
-<li>Pada tab Google Calendar yang terbuka, pastikan email <code style="background:#f1f5f9; color:#0f172a; padding:2px 6px; border-radius:4px;">{ruang['mail']}</code> sudah masuk di daftar tamu.</li>
+<li>Pada tab Google Calendar yang terbuka, email <code style="background:#f1f5f9; color:#0f172a; padding:2px 6px; border-radius:4px;">{ruang['mail']}</code> sudah terisi otomatis di daftar tamu.</li>
 <li>Klik <b>Save / Simpan</b>. Jadwal akan tampil otomatis di dasbor ini dalam ±30 detik.</li>
 </ol>
 </div>
